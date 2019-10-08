@@ -22,6 +22,11 @@ Implementera er lösning. Strukturera själv en lämplig struktur och användar-
 Besvara följande frågor innan du börjar skriva:
  * Vilka ska använda programmet?
  * Vad är den viktigaste informationen att få med?
+ 
+**Din lösning måste använda sig av följande OOP koncept**
+ * Method overriding
+ * Method overloading
+ * Arv
 
 *En lämplig avgränsning i denna del är HUR personen försöker avnjuta så mycket media som möjligt, det är helt OK om hen går uppifrån och ner i sin lista*
 
