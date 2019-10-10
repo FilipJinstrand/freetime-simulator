@@ -16,7 +16,7 @@ namespace freetime_simulator
     {
         private string name;
         private string author;
-        private int pages;
+        public int pages;
 
         public override void MediaInfo(){
             Console.WriteLine("Write the name of book");

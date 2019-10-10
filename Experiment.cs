@@ -8,14 +8,28 @@ namespace freetime_simulator
     {
         int number;
         int tries;
+        int time;
+        public List<Room> rooms = new List<Room>();
+        public Person person = new Person();
 
-        public void ExperimentStart()
+        int pages;
+
+
+        public void ExperimentSetup()
         {
-            Person person = new Person();
             person.PersonSetup();
 
             RoomSetup();
             MediaSetup();
+        }
+
+        private void RoomSetup(){
+            Room room1 = new Room();
+            room1.hasBookChair = false;
+            room1.hasDvdPlayer = true;
+            room1.hasTv = false;
+
+            rooms.Add(room1);
         }
 
         private void MediaSetup(){
@@ -23,9 +37,40 @@ namespace freetime_simulator
             Book book = new Book();
             Movie movie = new Movie();
             Music music = new Music();
-            medias.Add(book);
-            medias.Add(movie);
-            medias.Add(music);
+
+
+            foreach (Room room in rooms)
+            {
+                if (room.hasBookChair)
+                {
+                    medias.Add(book);   
+                }
+                else
+                {
+                   Console.WriteLine("The room does not have a book chair"); 
+                }
+
+                if (room.hasDvdPlayer)
+                {
+                    medias.Add(music);
+                }
+                else
+                {
+                   Console.WriteLine("The room does not have a music player"); 
+                }
+
+                if (room.hasTv)
+                {
+                    medias.Add(movie);
+                }
+                else
+                {
+                   Console.WriteLine("The room does not have a TV"); 
+                }
+
+                pages = book.pages;
+
+            }
 
             foreach (Media media in medias)
             {
@@ -33,14 +78,20 @@ namespace freetime_simulator
             }
         }
 
-        private void RoomSetup(){
-            List<Room> rooms = new List<Room>();
-            Room room1 = new Room();
-            room1.hasBookChair = true;
-            room1.hasDvdPlayer = true;
-            room1.hasTv = true;
+        private void ExperimentStart()
+        {
+            Random rand = new Random();
+            time = rand.Next(60, 180);
+            number++;
 
-            rooms.Add(room1);
+
+            // Stämmer inte!
+            int speed = pages * 60;
+
+            if (speed > time)
+            {
+                
+            }
         }
     }
 }

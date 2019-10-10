@@ -5,8 +5,8 @@ namespace freetime_simulator
 {
     class Person
     {
+        public int readSpeed;
         string name;
-        int readSpeed;
 
         bool hasBook = false;
         bool hasFilm = false;
