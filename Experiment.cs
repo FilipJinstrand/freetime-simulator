@@ -6,15 +6,16 @@ namespace freetime_simulator
 {
     class Experiment
     {
-        int experimentNumber;
-        int tries;
-        double time;
+        private int experimentNumber;
+        private int tries;
+        private double time;
         public List<Room> rooms = new List<Room>();
         public Person person = new Person();
+        public List<Media> medias = new List<Media>(); 
 
-        int pages;
-        double recordLength;
-        double movieLength;
+        private int pages;
+        private double recordLength;
+        private double movieLength;
 
 
 
@@ -39,7 +40,6 @@ namespace freetime_simulator
 
         private void MediaSetup()
         {
-            List<Media> medias = new List<Media>();
             Book book = new Book();
             Movie movie = new Movie();
             Music music = new Music();
@@ -47,6 +47,10 @@ namespace freetime_simulator
 
             foreach (Room room in rooms)
             {
+                /*FIXME:
+                    If hasBook = false
+                    console writes (The room does not have a book chair)!
+                */ 
                 if (room.hasBookChair && person.hasBook)
                 {
                     medias.Add(book);
@@ -98,9 +102,9 @@ namespace freetime_simulator
 
                     if (pagesRead >= pages)
                     {
-                        // Oklart om detta stämmer!
+                        //FIXME: Oklart om detta stämmer!
                         time = time - (pages / person.readSpeed);
-                        Console.WriteLine("The person read the book!");
+                        Console.WriteLine("The person made it through the book");
                     }
                     else
                     {
@@ -134,6 +138,11 @@ namespace freetime_simulator
                     }
                 }
             }
+        }
+
+        private void SaveExperiment()
+        {
+            
         }
     }
 }

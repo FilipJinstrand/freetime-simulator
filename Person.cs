@@ -17,13 +17,28 @@ namespace freetime_simulator
             Console.WriteLine("What's the persons name?");
             name = Console.ReadLine();
 
-            Console.WriteLine("What's the persons reading speed?");
-            readSpeed = Convert.ToInt32(Console.ReadLine());
+            bool reDo = true;
+            while (reDo)
+            {
+                try
+                {
+                    Console.WriteLine("What's the persons reading speed?");
+                    readSpeed = Convert.ToInt32(Console.ReadLine());
+                    reDo = false;
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+
+                    Console.WriteLine("\n\n\nYou have to write in numbers!");
+                }
+            }
 
             PersonBrought();
         }
 
-        private void PersonBrought(){
+        private void PersonBrought()
+        {
             string answer;
 
             Console.WriteLine("Did the person bring a book? [Y] [N]");
@@ -33,8 +48,6 @@ namespace freetime_simulator
             {
                 hasBook = true;
             }
-
-
 
             Console.WriteLine("Did the person bring a film? [Y] [N]");
             answer = Console.ReadLine();

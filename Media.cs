@@ -15,7 +15,7 @@ namespace freetime_simulator
 
     class Book : Media
     {
-        private string name;
+        public string name;
         private string author;
         public int pages;
 
@@ -36,11 +36,12 @@ namespace freetime_simulator
                     pages = Convert.ToInt32(Console.ReadLine());
                     reDo = false;
                 }
-                catch (SystemException e)
+                catch (System.Exception e)
                 {
-                    Console.WriteLine("You have to write in numbers!\n\n\n");
-
                     Console.WriteLine(e);
+
+                    Console.WriteLine("\n\n\nYou have to write in numbers!");
+
                 }
             }
         }
@@ -81,18 +82,32 @@ namespace freetime_simulator
     class Movie : Media
     {
         private string titel;
-        private int releaseDate;
+        private string releaseDate;
 
         public override void MediaInfo()
         {
             Console.WriteLine("Write the name of the movie");
             titel = Console.ReadLine();
 
-            Console.WriteLine("When was the movie released?");
-            releaseDate = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("When was the movie released? (month)");
+            releaseDate = Console.ReadLine();
 
-            Console.WriteLine("How long is the movie? (in minutes)");
-            length = Convert.ToDouble(Console.ReadLine());
+            bool reDo = true;
+            while (reDo)
+            {
+                try
+                {
+                    Console.WriteLine("How long is the movie? (in minutes)");
+                    length = Convert.ToDouble(Console.ReadLine());
+                    reDo = false;
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                    
+                    Console.WriteLine("\n\n\nYou have to write in numbers!");
+                }
+            }
         }
     }
 }
