@@ -6,7 +6,7 @@ namespace freetime_simulator
 {
     class Experiment
     {
-        int number;
+        int experimentNumber;
         int tries;
         int time;
         public List<Room> rooms = new List<Room>();
@@ -21,18 +21,21 @@ namespace freetime_simulator
 
             RoomSetup();
             MediaSetup();
+            ExperimentStart();
         }
 
-        private void RoomSetup(){
+        private void RoomSetup()
+        {
             Room room1 = new Room();
-            room1.hasBookChair = false;
-            room1.hasDvdPlayer = true;
+            room1.hasBookChair = true;
+            room1.hasDvdPlayer = false;
             room1.hasTv = false;
 
             rooms.Add(room1);
         }
 
-        private void MediaSetup(){
+        private void MediaSetup()
+        {
             List<Media> medias = new List<Media>();
             Book book = new Book();
             Movie movie = new Movie();
@@ -43,11 +46,11 @@ namespace freetime_simulator
             {
                 if (room.hasBookChair)
                 {
-                    medias.Add(book);   
+                    medias.Add(book);
                 }
                 else
                 {
-                   Console.WriteLine("The room does not have a book chair"); 
+                    Console.WriteLine("The room does not have a book chair");
                 }
 
                 if (room.hasDvdPlayer)
@@ -56,7 +59,7 @@ namespace freetime_simulator
                 }
                 else
                 {
-                   Console.WriteLine("The room does not have a music player"); 
+                    Console.WriteLine("The room does not have a music player");
                 }
 
                 if (room.hasTv)
@@ -65,32 +68,49 @@ namespace freetime_simulator
                 }
                 else
                 {
-                   Console.WriteLine("The room does not have a TV"); 
+                    Console.WriteLine("The room does not have a TV");
                 }
-
-                pages = book.pages;
-
             }
-
             foreach (Media media in medias)
             {
                 media.MediaInfo();
             }
+
+            pages = book.pages;
         }
 
         private void ExperimentStart()
         {
             Random rand = new Random();
             time = rand.Next(60, 180);
-            number++;
+            experimentNumber++;
 
-
-            // Stämmer inte!
-            int speed = pages * 60;
-
-            if (speed > time)
+            foreach (Room room in rooms)
             {
-                
+                if (room.hasBookChair && person.hasBook)
+                {
+                    int pagesRead = person.readSpeed * time;
+
+                    if (pagesRead >= pages)
+                    {
+                        time = (pages / person.readSpeed);
+                        System.Console.WriteLine("Personen läste klart boken!");
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Personen hann inte läsa klart boken :(");
+                    }
+                }
+
+                if (room.hasDvdPlayer && person.hasMusic)
+                {
+                    
+                }
+
+                if (room.hasTv && person.hasFilm)
+                {
+                    
+                }
             }
         }
     }

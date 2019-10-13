@@ -8,9 +8,9 @@ namespace freetime_simulator
         public int readSpeed;
         string name;
 
-        bool hasBook = false;
-        bool hasFilm = false;
-        bool hasMusic = false;
+        public bool hasBook = false;
+        public bool hasFilm = false;
+        public bool hasMusic = false;
 
         public void PersonSetup()
         {
