@@ -8,11 +8,14 @@ namespace freetime_simulator
     {
         int experimentNumber;
         int tries;
-        int time;
+        double time;
         public List<Room> rooms = new List<Room>();
         public Person person = new Person();
 
         int pages;
+        double recordLength;
+        double movieLength;
+
 
 
         public void ExperimentSetup()
@@ -28,8 +31,8 @@ namespace freetime_simulator
         {
             Room room1 = new Room();
             room1.hasBookChair = true;
-            room1.hasDvdPlayer = false;
-            room1.hasTv = false;
+            room1.hasDvdPlayer = true;
+            room1.hasTv = true;
 
             rooms.Add(room1);
         }
@@ -44,7 +47,7 @@ namespace freetime_simulator
 
             foreach (Room room in rooms)
             {
-                if (room.hasBookChair)
+                if (room.hasBookChair && person.hasBook)
                 {
                     medias.Add(book);
                 }
@@ -53,7 +56,7 @@ namespace freetime_simulator
                     Console.WriteLine("The room does not have a book chair");
                 }
 
-                if (room.hasDvdPlayer)
+                if (room.hasDvdPlayer && person.hasMusic)
                 {
                     medias.Add(music);
                 }
@@ -62,7 +65,7 @@ namespace freetime_simulator
                     Console.WriteLine("The room does not have a music player");
                 }
 
-                if (room.hasTv)
+                if (room.hasTv && person.hasFilm)
                 {
                     medias.Add(movie);
                 }
@@ -77,6 +80,8 @@ namespace freetime_simulator
             }
 
             pages = book.pages;
+            recordLength = music.length;
+            movieLength = movie.length;
         }
 
         private void ExperimentStart()
@@ -89,27 +94,44 @@ namespace freetime_simulator
             {
                 if (room.hasBookChair && person.hasBook)
                 {
-                    int pagesRead = person.readSpeed * time;
+                    int pagesRead = person.readSpeed * Convert.ToInt32(time);
 
                     if (pagesRead >= pages)
                     {
-                        time = (pages / person.readSpeed);
-                        System.Console.WriteLine("Personen läste klart boken!");
+                        // Oklart om detta stämmer!
+                        time = time - (pages / person.readSpeed);
+                        Console.WriteLine("The person read the book!");
                     }
                     else
                     {
-                        System.Console.WriteLine("Personen hann inte läsa klart boken :(");
+                        Console.WriteLine("The person did not finnish the book in time :(");
                     }
                 }
 
                 if (room.hasDvdPlayer && person.hasMusic)
                 {
-                    
+                    if (time >= recordLength)
+                    {
+                        time = time - recordLength;
+                        Console.WriteLine("The person made it through the music record");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The person did not finnish the record in time :(");
+                    }
                 }
 
                 if (room.hasTv && person.hasFilm)
                 {
-                    
+                    if (time >= movieLength)
+                    {
+                        time = time - movieLength;
+                        Console.WriteLine("The person made it through the movie!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The person did not finnish the movie in time :(");
+                    }
                 }
             }
         }

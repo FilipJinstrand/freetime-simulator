@@ -5,9 +5,10 @@ namespace freetime_simulator
 {
     class Media
     {
-        public float length;
+        public double length;
 
-        public virtual void MediaInfo(){
+        public virtual void MediaInfo()
+        {
 
         }
     }
@@ -18,15 +19,30 @@ namespace freetime_simulator
         private string author;
         public int pages;
 
-        public override void MediaInfo(){
+        public override void MediaInfo()
+        {
             Console.WriteLine("Write the name of book");
             name = Console.ReadLine();
 
             Console.WriteLine("Who made the book?");
             author = Console.ReadLine();
 
-            Console.WriteLine("How many pages does the book have?");
-            pages = Convert.ToInt32(Console.ReadLine());
+            bool reDo = true;
+            while (reDo)
+            {
+                Console.WriteLine("How many pages does the book have?");
+                try
+                {
+                    pages = Convert.ToInt32(Console.ReadLine());
+                    reDo = false;
+                }
+                catch (SystemException e)
+                {
+                    Console.WriteLine("You have to write in numbers!\n\n\n");
+
+                    Console.WriteLine(e);
+                }
+            }
         }
 
     }
@@ -37,7 +53,8 @@ namespace freetime_simulator
         private string artist;
         private bool twoSided;
 
-        public override void MediaInfo(){
+        public override void MediaInfo()
+        {
             string answer;
 
             Console.WriteLine("Write the name of the record");
@@ -54,6 +71,9 @@ namespace freetime_simulator
             {
                 twoSided = true;
             }
+
+            Console.WriteLine("How long is the record? (in minutes)");
+            length = Convert.ToDouble(Console.ReadLine());
         }
 
     }
@@ -63,12 +83,16 @@ namespace freetime_simulator
         private string titel;
         private int releaseDate;
 
-        public override void MediaInfo(){
+        public override void MediaInfo()
+        {
             Console.WriteLine("Write the name of the movie");
             titel = Console.ReadLine();
 
             Console.WriteLine("When was the movie released?");
             releaseDate = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("How long is the movie? (in minutes)");
+            length = Convert.ToDouble(Console.ReadLine());
         }
     }
 }
