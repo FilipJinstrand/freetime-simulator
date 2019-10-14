@@ -6,7 +6,7 @@ namespace freetime_simulator
     class Person
     {
         public int readSpeed;
-        string name;
+        public string name;
 
         public bool hasBook = false;
         public bool hasFilm = false;
@@ -64,7 +64,6 @@ namespace freetime_simulator
             {
                 hasMusic = true;
             }
-
         }
     }
 }

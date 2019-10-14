@@ -7,9 +7,16 @@ namespace freetime_simulator
     {
         public double length;
 
-        public virtual void MediaInfo()
+        public string saveText;
+
+        public virtual void WriteMediaInfo()
         {
 
+        }
+
+        public virtual string GetMediaInfo()
+        {
+            return saveText;
         }
     }
 
@@ -19,7 +26,7 @@ namespace freetime_simulator
         private string author;
         public int pages;
 
-        public override void MediaInfo()
+        public override void WriteMediaInfo()
         {
             Console.WriteLine("Write the name of book");
             name = Console.ReadLine();
@@ -46,6 +53,12 @@ namespace freetime_simulator
             }
         }
 
+        public override string GetMediaInfo()
+        {
+            saveText = "Name of book: " + name + "\n" + "Name of Author: " + author + "\n" + "Nr of pages: " + Convert.ToString(pages) + "\n\n\n";
+
+            return saveText;
+        }
     }
 
     class Music : Media
@@ -54,7 +67,7 @@ namespace freetime_simulator
         private string artist;
         private bool twoSided;
 
-        public override void MediaInfo()
+        public override void WriteMediaInfo()
         {
             string answer;
 
@@ -64,6 +77,7 @@ namespace freetime_simulator
             Console.WriteLine("Who made the record?");
             artist = Console.ReadLine();
 
+            //TODO: This has to do something!
             Console.WriteLine("Is it two sided? [Y] [N]");
             answer = Console.ReadLine();
             answer.ToLower();
@@ -77,17 +91,23 @@ namespace freetime_simulator
             length = Convert.ToDouble(Console.ReadLine());
         }
 
+        public override string GetMediaInfo()
+        {
+            saveText = "Name of record: " + name + "\n" + "Name of Artist: " + artist + "\n" + "Minutes long: " + Convert.ToString(length) + "\n\n\n";
+
+            return saveText;
+        }
     }
 
     class Movie : Media
     {
-        private string titel;
+        private string title;
         private string releaseDate;
 
-        public override void MediaInfo()
+        public override void WriteMediaInfo()
         {
             Console.WriteLine("Write the name of the movie");
-            titel = Console.ReadLine();
+            title = Console.ReadLine();
 
             Console.WriteLine("When was the movie released? (month)");
             releaseDate = Console.ReadLine();
@@ -108,6 +128,13 @@ namespace freetime_simulator
                     Console.WriteLine("\n\n\nYou have to write in numbers!");
                 }
             }
+        }
+
+        public override string GetMediaInfo()
+        {
+            saveText = "Name of the movie: " + title + "\n" + "Release date: " + releaseDate + "\n" + "Minutes long: " + Convert.ToString(length) + "\n\n\n";
+
+            return saveText;
         }
     }
 }

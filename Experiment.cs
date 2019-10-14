@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 
 
@@ -6,13 +8,14 @@ namespace freetime_simulator
 {
     class Experiment
     {
+        public List<Room> rooms = new List<Room>();
+        public Person person = new Person();
+        public List<Media> medias = new List<Media>();
+
+
         private int experimentNumber;
         private int tries;
         private double time;
-        public List<Room> rooms = new List<Room>();
-        public Person person = new Person();
-        public List<Media> medias = new List<Media>(); 
-
         private int pages;
         private double recordLength;
         private double movieLength;
@@ -26,6 +29,7 @@ namespace freetime_simulator
             RoomSetup();
             MediaSetup();
             ExperimentStart();
+            SaveExperiment();
         }
 
         private void RoomSetup()
@@ -50,7 +54,7 @@ namespace freetime_simulator
                 /*FIXME:
                     If hasBook = false
                     console writes (The room does not have a book chair)!
-                */ 
+                */
                 if (room.hasBookChair && person.hasBook)
                 {
                     medias.Add(book);
@@ -80,7 +84,7 @@ namespace freetime_simulator
             }
             foreach (Media media in medias)
             {
-                media.MediaInfo();
+                media.WriteMediaInfo();
             }
 
             pages = book.pages;
@@ -94,6 +98,7 @@ namespace freetime_simulator
             time = rand.Next(60, 180);
             experimentNumber++;
 
+            //FIXME: Om personen inte hinner klart boken så tas inte tiden bort!
             foreach (Room room in rooms)
             {
                 if (room.hasBookChair && person.hasBook)
@@ -142,7 +147,26 @@ namespace freetime_simulator
 
         private void SaveExperiment()
         {
-            
+            //TODO: Find a way to save to this directory on other computers
+
+            string path = @"D:\Programming\C# Programs\SKOLA\freetime-simulator\TestFile.txt";
+
+            string personInfo = "Person name: " + person.name + "\n" + "Person read speed: " + Convert.ToString(person.readSpeed) + " Pages / Minute\n\n\n";
+            if (!File.Exists(path))
+            {
+                File.AppendAllText(path, personInfo);
+                foreach (Media media in medias)
+                {
+                    File.AppendAllText(path, media.GetMediaInfo());
+                }
+            }
+            else
+            {
+                foreach (Media media in medias)
+                {
+                    File.AppendAllText(path, media.GetMediaInfo());
+                }
+            }
         }
     }
 }

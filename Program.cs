@@ -10,6 +10,8 @@ namespace freetime_simulator
             Experiment experiment = new Experiment();
 
             experiment.ExperimentSetup();
+
+            //experiment.SaveExperiment();
         }
     }
 }
