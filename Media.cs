@@ -8,6 +8,7 @@ namespace freetime_simulator
         public double length;
 
         public string saveText;
+        public bool completed = false;
 
         public virtual void WriteMediaInfo()
         {
@@ -55,7 +56,8 @@ namespace freetime_simulator
 
         public override string GetMediaInfo()
         {
-            saveText = "Name of book: " + name + "\n" + "Name of Author: " + author + "\n" + "Nr of pages: " + Convert.ToString(pages) + "\n\n\n";
+            saveText = "Name of book: " + name + "\n" + "Name of Author: " + author + "\n" + "Nr of pages: " +
+                Convert.ToString(pages) + "\n" + "Completed: " + Convert.ToSingle(completed) + "\n\n\n";
 
             return saveText;
         }
@@ -93,7 +95,8 @@ namespace freetime_simulator
 
         public override string GetMediaInfo()
         {
-            saveText = "Name of record: " + name + "\n" + "Name of Artist: " + artist + "\n" + "Minutes long: " + Convert.ToString(length) + "\n\n\n";
+            saveText = "Name of record: " + name + "\n" + "Name of Artist: " + artist + "\n" + "Minutes long: " +
+                Convert.ToString(length) + "\n" + "Completed: " + Convert.ToSingle(completed) + "\n\n\n";
 
             return saveText;
         }
@@ -124,7 +127,7 @@ namespace freetime_simulator
                 catch (System.Exception e)
                 {
                     Console.WriteLine(e);
-                    
+
                     Console.WriteLine("\n\n\nYou have to write in numbers!");
                 }
             }
@@ -132,7 +135,8 @@ namespace freetime_simulator
 
         public override string GetMediaInfo()
         {
-            saveText = "Name of the movie: " + title + "\n" + "Release date: " + releaseDate + "\n" + "Minutes long: " + Convert.ToString(length) + "\n\n\n";
+            saveText = "Name of the movie: " + title + "\n" + "Release date: " + releaseDate + "\n" + "Minutes long: " +
+                Convert.ToString(length) + "\n" + "Completed: " + Convert.ToSingle(completed) + "\n\n\n";
 
             return saveText;
         }
