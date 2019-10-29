@@ -16,7 +16,6 @@ namespace freetime_simulator
         public Movie movie;
         public Music music;
 
-
         private int experimentNumber;
         private int tries;
         private double time, startTime;
